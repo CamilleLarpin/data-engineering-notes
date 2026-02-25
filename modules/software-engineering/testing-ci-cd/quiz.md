@@ -1,1 +1,0 @@
-# Quiz — testing-ci-cd

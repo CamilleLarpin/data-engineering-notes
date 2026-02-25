@@ -1,1 +1,0 @@
-# Quiz — clean-code-documentation
