@@ -21,6 +21,16 @@ Notes brutes (cours)  →  Fiche Claude (synthèse)  →  Quiz hebdo  →  Révi
 
 ## Index des modules
 
+### Prep-Work
+
+| Date | Module | Notes | Fiche | Quiz |
+|------|--------|-------|-------|------|
+| Feb | Setup | [notes](modules/2026-02-00_prep-work_setup/notes.md) | [fiche](modules/2026-02-00_prep-work_setup/fiche.md) | [quiz](modules/2026-02-00_prep-work_setup/quiz.md) |
+| Feb | Data Types & Data Structures | [notes](modules/2026-02-00_prep-work_data-types-and-data-structures/notes.md) | [fiche](modules/2026-02-00_prep-work_data-types-and-data-structures/fiche.md) | [quiz](modules/2026-02-00_prep-work_data-types-and-data-structures/quiz.md) |
+| Feb | Control Flow | [notes](modules/2026-02-00_prep-work_control-flow/notes.md) | [fiche](modules/2026-02-00_prep-work_control-flow/fiche.md) | [quiz](modules/2026-02-00_prep-work_control-flow/quiz.md) |
+| Feb | Functions & Modules | [notes](modules/2026-02-00_prep-work_functions-and-modules/notes.md) | [fiche](modules/2026-02-00_prep-work_functions-and-modules/fiche.md) | [quiz](modules/2026-02-00_prep-work_functions-and-modules/quiz.md) |
+| Feb | Object-Oriented Programming | [notes](modules/2026-02-00_prep-work_object-oriented-programming/notes.md) | [fiche](modules/2026-02-00_prep-work_object-oriented-programming/fiche.md) | [quiz](modules/2026-02-00_prep-work_object-oriented-programming/quiz.md) |
+
 ### Basics
 
 | Date | Module | Notes | Fiche | Quiz |
@@ -136,6 +146,11 @@ Ajoute une ligne dans `errors-and-lessons/log.md` si tu as fait une erreur ou d�
 
 | Module | Catégorie | Statut |
 |--------|-----------|--------|
+| setup | Prep-Work | ✅ Done |
+| data-types-and-data-structures | Prep-Work | ✅ Done |
+| control-flow | Prep-Work | ✅ Done |
+| functions-and-modules | Prep-Work | ✅ Done |
+| object-oriented-programming | Prep-Work | ✅ Done |
 | terminal | Basics | ✅ Done |
 | git-and-github | Basics | ✅ Done |
 | sql-basics | Data-Handling | ✅ Done |
