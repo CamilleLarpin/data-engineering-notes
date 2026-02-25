@@ -44,11 +44,13 @@ Ce repo centralise les notes, fiches de révision et quiz d'un bootcamp Data Eng
 ## Structure du repo
 
 ```
-modules/<YYYY-MM-DD>_<catégorie>_<slug>/
-  notes.md          # notes brutes de cours (écrites par l'utilisateur)
-  fiche.md          # fiche de révision synthétisée
-  quiz.md           # quiz de révision
-  conversation.md   # extraits de conversations Claude.ai, triés par module
+modules/
+  <catégorie>/              # ex: prep-work, basics, data-handling, ai-engineering...
+    <slug>/                 # ex: sql-advanced, data-types-and-data-structures...
+      notes.md              # notes brutes de cours (écrites par l'utilisateur)
+      fiche✅.md            # fiche de révision (✅ dans le nom = générée)
+      quiz✅.md             # quiz de révision (✅ dans le nom = généré)
+      conversation.md       # extraits de conversations Claude.ai, triés par module
 _templates/
   fiche-template.md
   quiz-template.md
