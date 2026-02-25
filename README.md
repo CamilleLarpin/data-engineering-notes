@@ -13,9 +13,10 @@ Notes brutes (cours)  →  Fiche Claude (synthèse)  →  Quiz hebdo  →  Révi
 ```
 
 1. **Notes brutes** — prendre des notes librement pendant le cours dans `notes.md`
-2. **Fiche Claude** — demander à Claude de synthétiser en `fiche.md` (voir [Comment contribuer](#comment-contribuer))
-3. **Quiz hebdo** — générer des questions dans `quiz.md` à partir du template
-4. **Révision espacée** — tracker les révisions J+1 / J+7 / J+21 dans `reviews/spaced-repetition.md`
+2. **Conversations** — partager un lien Claude.ai dans Claude Code → dispatch auto dans `conversation.md` par module
+3. **Fiche Claude** — demander à Claude de synthétiser en `fiche.md` (voir [Comment contribuer](#comment-contribuer))
+4. **Quiz hebdo** — générer des questions dans `quiz.md` à partir du template
+5. **Révision espacée** — tracker les révisions J+1 / J+7 / J+21 dans `reviews/spaced-repetition.md`
 
 ---
 
@@ -98,6 +99,16 @@ Notes brutes (cours)  →  Fiche Claude (synthèse)  →  Quiz hebdo  →  Révi
 ---
 
 ## Comment contribuer
+
+### Dispatcher une conversation Claude.ai
+
+1. Dans Claude.ai, clique **Share** sur la conversation → copie le lien public
+2. Dans Claude Code (ce repo), écris :
+   ```
+   dispatche : https://claude.ai/share/...
+   ```
+3. Claude Code lit la conversation, trie les échanges par module, et met à jour les `conversation.md` concernés
+4. Commit le résultat : `git add . && git commit -m "conv: <modules mis à jour>"`
 
 ### Ajouter des notes
 
