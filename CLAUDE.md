@@ -37,6 +37,10 @@ Ce repo centralise les notes, fiches de révision et quiz d'un bootcamp Data Eng
 - Toujours appender (jamais écraser) — ajouter après le dernier contenu existant
 - Après dispatch, afficher un résumé : quels modules ont été mis à jour et combien d'échanges ajoutés
 
+**Langue :**
+- `conversation.md` : rester fidèle à la langue de la conversation source (français si la conversation était en français, anglais si en anglais)
+- `fiche.md` et `quiz.md` : toujours en anglais
+
 ## Structure du repo
 
 ```
@@ -50,10 +54,23 @@ _templates/
   quiz-template.md
 errors-and-lessons/log.md
 reviews/spaced-repetition.md
-generate.sh         # CLI : ./generate.sh <fiche|quiz> <slug>
 ```
 
-## Script generate.sh
+## Commande : generate
 
-`./generate.sh fiche <slug>` — génère un prompt prêt à copier pour créer `fiche.md` à partir de `notes.md` + `conversation.md`
-`./generate.sh quiz <slug>` — idem pour `quiz.md`, en partant de `fiche.md` si elle existe
+**Déclencheur :** l'utilisateur écrit `generate fiche <slug>` ou `generate quiz <slug>` dans Claude Code.
+
+**Ce que tu dois faire :**
+
+1. Trouver le dossier du module correspondant au slug dans `modules/`
+2. Lire `notes.md` et `conversation.md` du module (sources pour la fiche), ou `fiche.md` (source pour le quiz)
+3. Lire le template correspondant dans `_templates/`
+4. Générer le contenu en suivant le template
+5. Écrire le résultat directement dans `fiche.md` ou `quiz.md` du module
+6. Afficher un résumé : module trouvé, fichier écrit, nombre de sections générées
+
+**Règles :**
+- `fiche` : source = `notes.md` + `conversation.md`
+- `quiz` : source = `fiche.md` si elle existe, sinon `notes.md` + `conversation.md`
+- `fiche.md` et `quiz.md` sont toujours en **anglais**
+- Si le fichier cible existe déjà, l'écraser (régénération complète)
