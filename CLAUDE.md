@@ -74,3 +74,4 @@ reviews/spaced-repetition.md
 - `quiz` : source = `fiche.md` si elle existe, sinon `notes.md` + `conversation.md`
 - `fiche.md` et `quiz.md` sont toujours en **anglais**
 - Si le fichier cible existe déjà, l'écraser (régénération complète)
+- Une fois le fichier écrit, renommer le fichier avec ✅ dans le nom : `fiche.md` → `fiche✅.md`, `quiz.md` → `quiz✅.md`
