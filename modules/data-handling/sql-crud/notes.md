@@ -13,9 +13,16 @@ Partitioning
 
 CREATE OR REPLACE ne fonctionne que dans une même region
 
+Structure: regroupement de nbre de colonnes
+
+Array: reduire stockage
+
 
 ## Table VS View ##
 
 Table: octet de sauvergarde >> utilisation pour plugguer à un dashboard qui demande d’executer la donnée frequement
 
 View: octet de transformation >> utilisation possible dans pipeline de donnée pour étape interfmediaire OU comme proxi de secu car ne donne pas accès directement à la donnée
+
+
+## CRUD ##
