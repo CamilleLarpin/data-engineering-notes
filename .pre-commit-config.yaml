@@ -1,0 +1,10 @@
+repos:
+  - repo: local
+    hooks:
+      - id: improve-notes
+        name: Improve markdown notes with Claude
+        entry: python scripts/improve_notes.py
+        language: system
+        files: ^.*notes\.md$
+        pass_filenames: true
+        verbose: true

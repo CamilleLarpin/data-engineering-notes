@@ -1,35 +1,92 @@
-# Notes — git-and-github
+# Fiche — Terminal, Git & GitHub
 
-## Bash commands to try
+## Terminal — Commandes essentielles
 
-touch
+### Commandes de base
 
-tree
-cd ..
->>
->
-cat
-&&
-||
+| Commande | Description |
+|---|---|
+| `touch <file>` | Crée un fichier vide |
+| `cat <file>` | Affiche le contenu d'un fichier |
+| `tree` | Affiche l'arborescence du dossier |
+| `cd ..` | Remonte d'un niveau |
+| `echo "text"` | Affiche du texte dans le terminal |
 
-❓: XXX —help, man XXX, tldr XXX
-echo “”
+### Opérateurs logiques
+| Commande | Description |
+|---|---|
+| `cmd1 && cmd2` | Exécute cmd2 **seulement si** cmd1 réussit |
+| `cmd1 \|\| cmd2` | Exécute cmd2 **seulement si** cmd1 échoue |
 
-Nano/ VIM: editeur qui permet de modifier un fichier depuis le terminal
+### Redirection de sortie
+| Commande | Description |
+|---|---|
+| `>` | Redirige l'output vers un fichier (écrase le contenu) |
+| `>>` | Redirige l'output vers un fichier (ajoute au contenu) |
 
-- CTR X, Y Enter
+### Obtenir de l'aide
 
-## Git
+```bash
+man <cmd>       # documentation complète
+<cmd> --help    # aide rapide
+tldr <cmd>      # résumé pratique ⭐ (installé sur ta VM)
+```
 
-Git VS GitHub:
+### Éditeurs de texte en terminal
 
-- Git: open source version control system
-- GitHub: collaborative code-hosting
+- `nano` — simple, accessible (`Ctrl+X` → `Y` → `Enter` pour sauvegarder/quitter)
+- `vim` — puissant mais courbe d'apprentissage raide (`:wq` pour quitter)
 
-git remote
+---
 
-git diff
+## Git vs GitHub
 
-## Schedule VM
+| | Git | GitHub |
+|---|---|---|
+| Nature | Outil local open-source | Plateforme cloud |
+| Rôle | Versionne ton code | Héberge et partage les repos |
+| Sans l'autre? | Fonctionne seul | Nécessite Git |
 
-https://crontab.guru/
+---
+
+## Commandes Git essentielles
+
+### Configuration et initialisation
+```bash
+git init              # initialise un repo local
+git remote -v         # affiche les remotes connectés
+```
+
+### Suivi des modifications
+```bash
+git diff              # montre les changements non stagés
+git diff --staged     # montre les changements stagés
+```
+
+### Workflow standard
+```bash
+git add .
+git commit -m "message"
+git push
+```
+
+---
+
+## Planifier le démarrage/arrêt de la VM
+
+Utiliser **cron** — un planificateur de tâches Unix.
+
+```bash
+crontab -e   # éditer les tâches planifiées
+```
+
+### Syntaxe cron
+
+Référence syntaxe : https://crontab.guru
+
+Format : `minute heure jour mois jour_semaine commande`
+
+Exemple :
+```
+0 8 * * 1-5   # tous les jours de semaine à 8h00
+```
