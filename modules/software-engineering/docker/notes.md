@@ -1,1 +1,41 @@
-# Notes — docker
+# Docker - Gestion des conteneurs
+
+## Vue d'ensemble
+
+Docker est une plateforme de conteneurisation qui permet de créer, déployer et gérer des applications dans des environnements isolés appelés conteneurs. Cette technologie révolutionne le déploiement d'applications en garantissant la portabilité et la cohérence entre les environnements de développement et de production.
+
+## Avantages principaux
+
+### Sécurité
+
+Docker offre plusieurs couches de sécurité :
+
+- **Isolation des processus** : Chaque conteneur fonctionne dans un environnement isolé, limitant l'accès aux ressources système
+- **Contrôle d'accès granulaire** : Gestion fine des permissions et des utilisateurs dans les conteneurs
+- **Images signées** : Vérification de l'intégrité des images Docker via les signatures cryptographiques
+- **Scanning de vulnérabilités** : Détection automatique des failles de sécurité dans les images
+- **Réseau sécurisé** : Isolation réseau entre conteneurs et contrôle des communications
+
+### Collaboration
+
+Docker facilite le travail en équipe :
+
+- **Cohérence des environnements** : "Ça marche sur ma machine" devient obsolète grâce à la standardisation
+- **Partage simplifié** : Distribution facile des applications via les registres Docker
+- **Versioning des environnements** : Traçabilité complète des versions d'applications et de leurs dépendances
+- **Intégration CI/CD** : Automatisation des déploiements et des tests dans des environnements identiques
+- **Documentation vivante** : Les Dockerfile servent de documentation technique pour recréer l'environnement
+
+## Concepts clés
+
+### Conteneurs vs Images
+
+- **Image** : Modèle en lecture seule contenant le code, les dépendances et la configuration
+- **Conteneur** : Instance en cours d'exécution d'une image Docker
+
+### Architecture
+
+Docker utilise une architecture client-serveur avec :
+- **Docker Client** : Interface en ligne de commande
+- **Docker Daemon** : Moteur qui gère les conteneurs
+- **Docker Registry** : Stockage et distribution des images (ex: Docker Hub)
