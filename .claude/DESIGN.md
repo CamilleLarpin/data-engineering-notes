@@ -57,9 +57,9 @@
 - Fiches par module : `fiche_<module>.md` dans `modules/<catégorie>/<slug>/`
 
 ## Success Criteria
-- [ ] Chaque jour de bootcamp a un `YYYY-MM-DD_notes.md`
+- [ ] Chaque jour de bootcamp a un `notes_YYYY-MM-DD.md` dans `daily/YYYY-MM-DD/`
 - [ ] `enrich.py` met à jour les fiches des modules correspondants
-- [ ] Chaque module a une `<module>_fiche.md` à jour avant les évaluations
+- [ ] Chaque module a une `fiche_<module>.md` à jour avant les évaluations
 - [ ] Les erreurs quiz sont loggées dans `errors-and-lessons/log.md`
 
 ## Use Cases

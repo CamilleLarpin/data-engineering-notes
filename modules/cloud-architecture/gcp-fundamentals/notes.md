@@ -1,1 +1,0 @@
-# Notes — gcp-fundamentals

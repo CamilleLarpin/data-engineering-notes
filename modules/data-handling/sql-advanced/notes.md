@@ -1,2 +1,0 @@
-# Notes — sql-advanced
-

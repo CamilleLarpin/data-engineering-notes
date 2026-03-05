@@ -1,1 +1,0 @@
-# Notes — object-oriented-programming
