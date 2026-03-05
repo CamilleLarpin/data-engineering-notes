@@ -7,12 +7,7 @@
 
 ---
 
-## Now — Phase 2 : Capture (Layer 1) — UC1
-- [ ] Tester le hook sur modification au milieu d'un fichier
-- [ ] Tester le hook sur suppression de lignes
-- [ ] Ajouter tests pytest pour ces scénarios
-
-## Next — Phase 3 : Enrich (Layer 2) — UC2
+## Now — Phase 3 : Enrich (Layer 2) — UC2
 - [ ] Implémenter `enrich.py` : lit `notes_YYYY-MM-DD.md` + `conversation_*.md` → met à jour `fiche_<module>.md`
 - [ ] CLI avec Click
 - [ ] Logging avec Loguru
@@ -40,3 +35,6 @@
 - [x] Loguru ajouté — debug sur toutes les fonctions
 - [x] Bug `\ No newline at end of file` corrigé
 - [x] `filter_new_lines` extraite et testée
+- [x] `LOG_LEVEL` env var — debug silencieux par défaut, visible avec `LOG_LEVEL=DEBUG`
+- [x] `fail_fast: true` + `verbose: true` retiré — pre-commit s'arrête au premier échec, sortie propre
+- [x] Phase 2 complète : hook testé sur modification, suppression, tests pytest ajoutés
