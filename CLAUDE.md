@@ -1,20 +1,68 @@
-# Instructions pour Claude Code — Data Engineering Bootcamp
+# Data Engineering Notes — Claude Context
 
-## Contexte
+> Load tier: hot
 
-Ce repo centralise les notes et fiches de révision d'un bootcamp Data Engineering (Feb 23 – Mar 27, 2026). Chaque module a un dossier dans `modules/` avec 3 fichiers : `notes.md`, `fiche.md`, `conversation.md`. Les quiz sont générés à la demande par Claude.ai (qui a accès au repo GitHub).
+@~/.claude/CLAUDE.md
 
-## Commande : dispatche
+## Project
+**Purpose**: Centraliser notes + fiches de révision du bootcamp Data Engineering (Feb 23 – Mar 27, 2026)
+**Status**: 🔵 Building
+**Repo**: —
+**Stack**: Python · Claude API · pre-commit · Ruff
 
-**Déclencheur :** l'utilisateur écrit `dispatche : <url>` (lien de conversation Claude.ai partagée publiquement).
+## Context Files
+- .claude/CONTEXT.md — current state, architecture, file structure, key dependencies
+- .claude/DECISIONS.md — active decisions only (resolved → DECISIONS_ARCHIVE.md)
+- .claude/LESSONS.md — what to avoid: mistakes, patterns, gotchas (never delete)
+- .claude/DESIGN.md — problem space, use cases, user flows, solution approach, non-goals
+- .claude/TODOS.md — active milestones, next actions, blocked items
 
-**Ce que tu dois faire :**
+## Active Constraints
+- Toujours appender, jamais écraser (`conversation.md`, `errors-and-lessons/log.md`)
+- `conversation.md` : langue de la conversation source
+- `fiche.md` : toujours en anglais
+- `errors-and-lessons/log.md` : toujours en anglais
+- `enrich.py` lancé manuellement — jamais au commit
+
+## Quick Reference
+- Scripts: `python scripts/enrich.py daily/YYYY-MM-DD.md` · `python scripts/quiz.py <slug>`
+- Modules: `modules/<catégorie>/<slug>/` (notes.md · fiche✅.md · conversation.md)
+
+## Current Focus
+Phase 1 (pre-commit: Ruff + typos) et Phase 2 (enrich.py) sont les deux prochaines features à construire. Voir .claude/TODOS.md.
+
+---
+
+## Commande : enrich
+
+**Déclencheur :** `python scripts/enrich.py daily/YYYY-MM-DD.md`
+
+**Ce que Claude fait :**
+
+1. Lit `daily/YYYY-MM-DD.md`
+2. Enrichit le contenu (comble les lacunes, ajoute contexte, corrige spelling)
+3. Tague chaque section avec le topic correspondant (matching slugs dans `modules/`)
+4. Dispatche le contenu tagué vers `modules/<topic>/conversation.md` (toujours append)
+5. Affiche un résumé : quels modules mis à jour, combien d'échanges ajoutés
+
+**Règles :**
+- Toujours appender, jamais écraser
+- Garder le niveau de détail des notes originales
+- Trimmer : salutations, meta-commentaires, confirmations courtes
+
+---
+
+## Commande : dispatche (legacy)
+
+**Déclencheur :** `dispatche : <url>` (lien de conversation Claude.ai partagée publiquement)
+
+**Ce que Claude fait :**
 
 1. Fetch le contenu de l'URL avec WebFetch
-2. Lire la conversation en entier
-3. Identifier tous les modules abordés (faire correspondre avec les dossiers dans `modules/`)
-4. Pour chaque module identifié, **appender** le contenu pertinent dans `modules/<catégorie>/<slug>/conversation.md`
-5. Si la conversation contient un quiz et des erreurs de l'utilisateur, **appender** dans `errors-and-lessons/log.md`
+2. Identifie tous les modules abordés
+3. Appende le contenu pertinent dans `modules/<catégorie>/<slug>/conversation.md`
+4. Si quiz + erreurs, appende dans `errors-and-lessons/log.md`
+5. Affiche résumé : modules mis à jour, échanges ajoutés, erreurs loggées
 
 **Format d'une entrée dans `conversation.md` :**
 
@@ -24,62 +72,33 @@ Ce repo centralise les notes et fiches de révision d'un bootcamp Data Engineeri
 
 **[Question/Sujet]** Résumé de la question ou du sujet abordé
 
-**[Explication]** Explication de Claude, verbatim si elle est claire et concise, résumée sinon. Garder les analogies, exemples concrets, reformulations simples. Garder les blocs de code tels quels.
+**[Explication]** Explication de Claude, verbatim si claire et concise, résumée sinon. Garder analogies, exemples, blocs de code tels quels.
 
-**[Insight clé]** Ce qui était une zone de flou et qui a été clarifié.
+**[Insight clé]** Ce qui était flou et a été clarifié.
 
 ---
 ```
 
 **Format d'une entrée dans `errors-and-lessons/log.md` :**
 
-Appender une ligne par erreur dans le tableau existant :
-
 ```markdown
 | JJ/MM/AAAA | catégorie/slug | Description courte de l'erreur | Leçon / ce qu'il faut retenir |
 ```
 
-**Règles de tri :**
-- Un échange peut apparaître dans plusieurs `conversation.md` si plusieurs modules sont abordés
-- Garder le niveau de détail des explications de Claude (ne pas trop résumer)
-- Trimmer : salutations, reformulations meta ("peux-tu expliquer autrement"), confirmations courtes
-- Toujours appender (jamais écraser) — ajouter après le dernier contenu existant
-- Après dispatch, afficher un résumé : quels modules ont été mis à jour, combien d'échanges ajoutés, et combien d'erreurs loggées
-
-**Langue :**
-- `conversation.md` : rester fidèle à la langue de la conversation source (français si la conversation était en français, anglais si en anglais)
-- `fiche.md` : toujours en anglais
-- `errors-and-lessons/log.md` : toujours en anglais
-
-## Structure du repo
-
-```
-modules/
-  <catégorie>/              # ex: prep-work, basics, data-handling, ai-engineering...
-    <slug>/                 # ex: sql-advanced, data-types-and-data-structures...
-      notes.md              # notes brutes de cours (écrites par l'utilisateur)
-      fiche✅.md            # fiche de révision (✅ dans le nom = générée)
-      conversation.md       # extraits de conversations Claude.ai, triés par module
-_templates/
-  fiche-template.md
-errors-and-lessons/log.md   # journal global des erreurs faites en quiz
-reviews/spaced-repetition.md
-```
+---
 
 ## Commande : generate
 
-**Déclencheur :** l'utilisateur écrit `generate fiche <slug>` dans Claude Code.
+**Déclencheur :** `generate fiche <slug>`
 
-**Ce que tu dois faire :**
+**Ce que Claude fait :**
 
-1. Trouver le dossier du module correspondant au slug dans `modules/`
-2. Lire `notes.md` et `conversation.md` du module
-3. Lire le template dans `_templates/fiche-template.md`
-4. Générer le contenu en suivant le template
-5. Écrire le résultat directement dans `fiche.md` du module
-6. Renommer le fichier avec ✅ dans le nom : `fiche.md` → `fiche✅.md`
-7. Afficher un résumé : module trouvé, fichier écrit
+1. Trouve le dossier du module dans `modules/`
+2. Lit `notes.md` et `conversation.md`
+3. Lit `_templates/fiche-template.md`
+4. Génère la fiche en suivant le template
+5. Écrit dans `fiche.md` puis renomme en `fiche✅.md`
 
 **Règles :**
-- `fiche.md` est toujours en **anglais**
-- Si le fichier cible existe déjà, l'écraser (régénération complète)
+- Toujours en anglais
+- Écraser si le fichier existe déjà (régénération complète)
