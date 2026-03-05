@@ -52,9 +52,9 @@
 | Data pipelines | modéliser `enrich.py` comme un mini-pipeline |
 
 ## File Naming
-- Notes quotidiennes : `notes.md` dans `daily/YYYY-MM-DD/`
-- Conversations : `conversation_<slug>.md` dans `daily/YYYY-MM-DD/` (zéro ou plusieurs, une par module)
-- Fiches par module : `<module>_fiche.md` dans `modules/<catégorie>/<slug>/`
+- Notes quotidiennes : `notes_YYYY-MM-DD.md` dans `daily/YYYY-MM-DD/`
+- Conversations : `conversation_YYYY-MM-DD.md`, `conversation_YYYY-MM-DD_2.md`, … dans `daily/YYYY-MM-DD/` (zéro ou plusieurs)
+- Fiches par module : `fiche_<module>.md` dans `modules/<catégorie>/<slug>/`
 
 ## Success Criteria
 - [ ] Chaque jour de bootcamp a un `YYYY-MM-DD_notes.md`

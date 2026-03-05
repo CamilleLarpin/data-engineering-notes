@@ -17,7 +17,7 @@ Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure de base des modules exist
 
 ```
 Layer 1 — Capture : daily/YYYY-MM-DD/notes.md              (écriture libre, sans friction)
-                    daily/YYYY-MM-DD/conversation_<slug>.md (optionnel, zéro ou plusieurs)
+                    daily/YYYY-MM-DD/conversation_YYYY-MM-DD[_N].md (optionnel, zéro ou plusieurs)
          ↓ pre-commit (spelling + TBC resolution, léger)
          ↓ enrich.py (Claude API, manuel, fin de journée)
 Layer 2 — Digest  : modules/<catégorie>/<slug>/<module>_fiche.md (enrichi + dispatché)
@@ -53,7 +53,7 @@ data-engineering-notes/
   daily/
     YYYY-MM-DD/
       notes.md                  # capture quotidienne
-      conversation_<slug>.md    # optionnel, zéro ou plusieurs, une par module
+      conversation_YYYY-MM-DD[_N].md  # optionnel, zéro ou plusieurs
   modules/
     <catégorie>/<slug>/
       <module>_fiche.md         # fiche de révision (output de enrich.py)

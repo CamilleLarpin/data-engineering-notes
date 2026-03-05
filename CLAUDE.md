@@ -18,8 +18,8 @@
 - .claude/TODOS.md — active milestones, next actions, blocked items
 
 ## Active Constraints
-- Toujours appender, jamais écraser (`conversation_<slug>.md`, `errors-and-lessons/log.md`)
-- `conversation_<slug>.md` : langue de la conversation source
+- Toujours appender, jamais écraser (`conversation_YYYY-MM-DD.md`, `errors-and-lessons/log.md`)
+- `conversation_YYYY-MM-DD.md` : langue de la conversation source
 - `<module>_fiche.md` : toujours en anglais
 - `errors-and-lessons/log.md` : toujours en anglais
 - `enrich.py` lancé manuellement — jamais au commit
@@ -29,8 +29,8 @@ Quand un nouveau module est ajouté ou qu'un sujet est couvert, suggérer proact
 
 ## Quick Reference
 - Scripts: `python scripts/enrich.py daily/YYYY-MM-DD/` · `python scripts/quiz.py <slug>`
-- Daily: `daily/YYYY-MM-DD/` (`notes.md` · `conversation_<slug>.md`)
-- Modules: `modules/<catégorie>/<slug>/` (`<module>_fiche.md` uniquement)
+- Daily: `daily/YYYY-MM-DD/` (`notes_YYYY-MM-DD.md` · `conversation_YYYY-MM-DD[_N].md`)
+- Modules: `modules/<catégorie>/<slug>/` (`fiche_<module>.md` uniquement)
 
 ## Current Focus
 Phase 1 (réorganisation dossiers) → voir .claude/TODOS.md
