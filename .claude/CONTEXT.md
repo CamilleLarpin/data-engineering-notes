@@ -16,42 +16,56 @@ Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure de base des modules exist
 3-layer learning system :
 
 ```
-Layer 1 — Capture    : daily/YYYY-MM-DD.md  (écriture libre, sans friction)
-         ↓ enrich.py (Claude API, manuel)
-Layer 2 — Structure  : modules/<catégorie>/<slug>/conversation.md (enrichi + dispatché)
-         ↓ generate / quiz.py
-Layer 3 — Mastery    : fiche✅.md · errors-and-lessons/log.md · reviews/spaced-repetition.md
+Layer 1 — Capture : daily/YYYY-MM-DD_notes.md  (écriture libre, sans friction)
+         ↓ pre-commit (spelling + TBC resolution, léger)
+         ↓ enrich.py (Claude API, manuel, fin de journée)
+Layer 2 — Digest  : modules/<catégorie>/<slug>/<module>_fiche.md (enrichi + dispatché)
+                    modules/<catégorie>/<slug>/conversation.md (input manuel, copy-paste)
+         ↓ quiz.py
+Layer 3 — Master  : quiz multi-modules · errors-and-lessons/log.md
 ```
 
-## File Structure
+## File Structure — Current
 ```
 data-engineering-notes/
   .claude/              # context files
   _templates/           # fiche-template.md, quiz-template.md
-  daily/                # YYYY-MM-DD.md — capture brute (à créer)
   modules/
     <catégorie>/<slug>/
-      notes.md          # dispatché + enrichi par Claude
-      fiche✅.md        # fiche de révision structurée
-      conversation.md   # extraits dispatché depuis daily/
+      notes.md          # notes brutes existantes (legacy)
+      fiche.md          # fiches existantes (legacy, à migrer)
+      conversation.md   # extraits de conversations Claude.ai
   errors-and-lessons/
-    log.md              # erreurs quiz, points faibles
+    log.md
   reviews/
     spaced-repetition.md
   scripts/
-    enrich.py           # enrichissement + dispatch (à implémenter)
-    quiz.py             # quiz CLI (à implémenter)
+    enrich.py           # stub existant (à implémenter)
+    improve_notes.py    # hook pre-commit existant
 ```
 
-## Key Dependencies
-| Dependency | Version/URL | Purpose |
-|---|---|---|
-| Python | 3.x | scripts enrich.py + quiz.py |
-| Claude API | Sonnet | enrichissement + dispatch |
-| pre-commit | — | Ruff lint + typos au commit |
-| Ruff | — | lint + formatting |
+## File Structure — Target
+*(supprimer cette section une fois atteinte)*
+```
+data-engineering-notes/
+  .claude/              # context files
+  _templates/           # fiche-template.md, quiz-template.md
+  daily/
+    YYYY-MM-DD_notes.md # capture quotidienne
+  modules/
+    <catégorie>/<slug>/
+      <module>_fiche.md # fiche de révision (remplace fiche.md)
+      conversation.md   # input manuel pour enrich.py
+  errors-and-lessons/
+    log.md
+  scripts/
+    enrich.py           # enrichissement + dispatch → <module>_fiche.md
+    quiz.py             # quiz CLI multi-modules
+  Makefile              # commandes dev
+  pyproject.toml        # poetry + ruff + pytest config
+```
 
 ## Environment
-- **Dev**: local, macOS
+- **Dev**: local, macOS, pyenv + Poetry venv
 - **Prod**: —
-- **Credentials**: Claude API key (à définir dans .env ou env var)
+- **Credentials**: Claude API key (`.env`, jamais commité)

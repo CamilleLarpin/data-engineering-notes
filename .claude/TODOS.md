@@ -7,17 +7,30 @@
 
 ---
 
-## Now
-- [ ] Phase 1 — Pre-commit: configurer Ruff + typos sur `daily/*.md` (lint + spelling, non-destructif, ne bloque jamais)
+## Now — Phase 1 : Réorganisation des dossiers
+- [ ] Renommer `fiche.md` → `<module>_fiche.md` dans tous les modules existants
+- [ ] Créer le dossier `daily/`
+- [ ] Migrer/archiver les `notes.md` existants (legacy) si nécessaire
+- [ ] Vérifier que la file structure courante correspond à la target (CONTEXT.md)
 
-## Next
-- [ ] Phase 2 — `enrich.py`: lit `daily/YYYY-MM-DD.md`, enrichit via Claude API, tague par topic, dispatche vers `modules/<topic>/conversation.md`
-- [ ] Créer le dossier `daily/` et ajouter un premier fichier de capture
+## Next — Phase 2 : Capture (Layer 1)
+- [ ] Configurer pre-commit UC1 : spelling + résolution TBC/TBD/? sur `daily/*_notes.md`
+- [ ] Tester le hook sur un premier fichier de capture
+
+## Next — Phase 3 : Enrich (Layer 2)
+- [ ] Implémenter `enrich.py` : lit daily notes + conversation.md → met à jour `<module>_fiche.md`
+- [ ] CLI avec Click
+- [ ] Logging avec Loguru
+- [ ] Tests avec Pytest
+- [ ] Entrée Makefile : `make enrich`
+
+## TBC — Phase 4
+- [ ] À définir après Phase 3 (quiz CLI, post-commit UC4, ou autre)
 
 ## Blocked
 — aucun
 
 ## Done (recent — clear periodically)
-- [x] Architecture 3-layer définie (daily → enrich → modules → quiz)
-- [x] Roadmap phases 1–6 documentée
-- [x] Structure `.claude/` initialisée
+- [x] Architecture 3-layer définie (Capture → Digest → Master)
+- [x] Structure `.claude/` initialisée avec tous les fichiers templates
+- [x] DESIGN.md complet : UCs, scope, outils/notions cibles
