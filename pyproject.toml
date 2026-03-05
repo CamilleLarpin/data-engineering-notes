@@ -1,3 +1,4 @@
+# ── Project ───────────────────────────────────────────────
 [project]
 name = "data-engineering-notes"
 version = "0.1.0"
@@ -6,18 +7,22 @@ authors = [
     {name = "Camille",email = "camille.larpin@gmail.com"}
 ]
 readme = "README.md"
-requires-python = "^3.12"
+requires-python = ">=3.12"
 dependencies = [
     "anthropic (>=0.84.0,<0.85.0)",
     "click (>=8.3.1,<9.0.0)",
     "python-dotenv (>=1.2.2,<2.0.0)"
 ]
 
-
+# ── Build ──────────────────────────────────────────────────
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poetry]
+package-mode = false
+
+# ── Dependencies ───────────────────────────────────────────
 [dependency-groups]
 dev = [
     "ruff (>=0.15.4,<0.16.0)",
@@ -25,8 +30,13 @@ dev = [
     "pytest (>=9.0.2,<10.0.0)"
 ]
 
-[tool.poetry]
-package-mode = false
-
+# ── Testing ────────────────────────────────────────────────
 [tool.pytest.ini_options]
 pythonpath = ["."]
+
+# ── Linting & Formatting ───────────────────────────────────
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N"]  # style, pyflakes, isort, naming

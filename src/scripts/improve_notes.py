@@ -1,9 +1,10 @@
 import os
+import subprocess
 import sys
 from pathlib import Path
+
 import anthropic
 from dotenv import load_dotenv
-import subprocess
 
 load_dotenv()
 
@@ -13,8 +14,7 @@ SYSTEM_PROMPT = """..."""
 def get_staged_diff(filepath: str) -> str:
     """Retourne le diff git staged pour un fichier donné."""
     result = subprocess.run(
-        ["git", "diff", "--cached", "-U0", filepath],
-        capture_output=True, text=True
+        ["git", "diff", "--cached", "-U0", filepath], capture_output=True, text=True
     )
     return result.stdout
 
@@ -26,7 +26,8 @@ def extract_added_lines(diff: str) -> list[tuple[int, str]]:
     for line in diff.splitlines():
         if line.startswith("@@"):
             import re
-            match = re.search(r'\+(\d+)', line)
+
+            match = re.search(r"\+(\d+)", line)
             if match:
                 line_num = int(match.group(1))
         elif line.startswith("+") and not line.startswith("+++"):
