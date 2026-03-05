@@ -16,11 +16,11 @@ Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure de base des modules exist
 3-layer learning system :
 
 ```
-Layer 1 — Capture : daily/YYYY-MM-DD_notes.md  (écriture libre, sans friction)
+Layer 1 — Capture : daily/YYYY-MM-DD/notes.md              (écriture libre, sans friction)
+                    daily/YYYY-MM-DD/conversation_<slug>.md (optionnel, zéro ou plusieurs)
          ↓ pre-commit (spelling + TBC resolution, léger)
          ↓ enrich.py (Claude API, manuel, fin de journée)
 Layer 2 — Digest  : modules/<catégorie>/<slug>/<module>_fiche.md (enrichi + dispatché)
-                    modules/<catégorie>/<slug>/conversation.md (input manuel, copy-paste)
          ↓ quiz.py
 Layer 3 — Master  : quiz multi-modules · errors-and-lessons/log.md
 ```
@@ -51,11 +51,12 @@ data-engineering-notes/
   .claude/              # context files
   _templates/           # fiche-template.md, quiz-template.md
   daily/
-    YYYY-MM-DD_notes.md # capture quotidienne
+    YYYY-MM-DD/
+      notes.md                  # capture quotidienne
+      conversation_<slug>.md    # optionnel, zéro ou plusieurs, une par module
   modules/
     <catégorie>/<slug>/
-      <module>_fiche.md # fiche de révision (remplace fiche.md)
-      conversation.md   # input manuel pour enrich.py
+      <module>_fiche.md         # fiche de révision (output de enrich.py)
   errors-and-lessons/
     log.md
   scripts/

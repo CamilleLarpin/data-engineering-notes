@@ -52,7 +52,8 @@
 | Data pipelines | modéliser `enrich.py` comme un mini-pipeline |
 
 ## File Naming
-- Notes quotidiennes : `YYYY-MM-DD_notes.md` dans `daily/`
+- Notes quotidiennes : `notes.md` dans `daily/YYYY-MM-DD/`
+- Conversations : `conversation_<slug>.md` dans `daily/YYYY-MM-DD/` (zéro ou plusieurs, une par module)
 - Fiches par module : `<module>_fiche.md` dans `modules/<catégorie>/<slug>/`
 
 ## Success Criteria
@@ -77,7 +78,7 @@
 
 ### UC2 — Enrichissement en fin de journée
 **Actor**: Camille, fin de journée
-**Flow**: Camille copy-paste sa conversation Claude.ai dans `conversation.md` du module → `python scripts/enrich.py daily/YYYY-MM-DD_notes.md` → Claude lit daily notes + conversation.md → met à jour directement les `<module>_fiche.md` des modules concernés → résumé affiché → Camille review → commit
+**Flow**: Camille copy-paste sa conversation Claude.ai dans `daily/YYYY-MM-DD/conversation_<slug>.md` (une par module) → `python scripts/enrich.py daily/YYYY-MM-DD/` → Claude lit `notes.md` + `conversation_<slug>.md` du dossier → met à jour directement les `<module>_fiche.md` des modules concernés → résumé affiché → Camille review → commit
 **Enrichissement scope** (plus complet que UC1, mais resté core) :
 - Combler les lacunes conceptuelles, ajouter contexte, exemples concis
 - Pas de blocs de code volumineux
