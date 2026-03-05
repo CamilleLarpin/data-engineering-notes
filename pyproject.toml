@@ -7,11 +7,12 @@ authors = [
     {name = "Camille",email = "camille.larpin@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<4.0"
 dependencies = [
     "anthropic (>=0.84.0,<0.85.0)",
     "click (>=8.3.1,<9.0.0)",
-    "python-dotenv (>=1.2.2,<2.0.0)"
+    "python-dotenv (>=1.2.2,<2.0.0)",
+    "loguru (>=0.7.3,<0.8.0)"
 ]
 
 # ── Build ──────────────────────────────────────────────────
@@ -36,7 +37,7 @@ pythonpath = ["."]
 
 # ── Linting & Formatting ───────────────────────────────────
 [tool.ruff]
-line-length = 100
+line-length = 120
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N"]  # style, pyflakes, isort, naming

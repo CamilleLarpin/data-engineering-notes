@@ -20,6 +20,28 @@ def test_apply_corrections_simple(tmp_path):
     assert lines[1] == "CORRECTED"
 
 
+def test_extract_added_lines_no_newline():
+    """Vérifie que la ligne '\\ No newline at end of file' n'incrémente pas le compteur."""
+    diff = "@@ -136 +136,3 @@\n-old line\n\\ No newline at end of file\n+old line\n+\n+new line\n"
+    result = extract_added_lines(diff)
+    assert result == [(136, "old line"), (137, ""), (138, "new line")]
+
+
+def test_extract_added_lines_middle():
+    """Vérifie que les lignes ajoutées au milieu d'un fichier sont correctement indexées."""
+    diff = "@@ -3,0 +4,2 @@\n+new line 1\n+new line 2\n"
+    result = extract_added_lines(diff)
+    assert result == [(4, "new line 1"), (5, "new line 2")]
+
+
+def test_get_committed_lines_returns_lines():
+    """Vérifie que get_committed_lines retourne les lignes du fichier committé."""
+    mock_result = MagicMock(stdout="line 1\nline 2\nline 3\n")
+    with patch("src.scripts.improve_notes.subprocess.run", return_value=mock_result):
+        result = sut.get_committed_lines("notes/foo.md")
+    assert result == ["line 1", "line 2", "line 3"]
+
+
 def test_apply_corrections_out_of_range(tmp_path):
     """Vérifie qu'une correction hors-range est ignorée sans erreur."""
     f = tmp_path / "notes.md"
@@ -53,3 +75,27 @@ def test_improve_lines_returns_corrected_lines():
 def test_improve_lines_empty_input():
     """Vérifie que improve_lines retourne une liste vide si l'input est vide."""
     assert sut.improve_lines([]) == []
+
+
+def test_filter_new_lines_removes_existing():
+    """Vérifie que les lignes déjà committées sont filtrées."""
+    committed = ["line 1", "line 2", "line 3"]
+    added = [(1, "line 1"), (2, "line 2"), (3, "new line")]
+    result = sut.filter_new_lines(added, committed)
+    assert result == [(3, "new line")]
+
+
+def test_filter_new_lines_removes_empty():
+    """Vérifie que les lignes vides sont filtrées."""
+    committed = ["line 1"]
+    added = [(2, ""), (3, "new line")]
+    result = sut.filter_new_lines(added, committed)
+    assert result == [(3, "new line")]
+
+
+def test_filter_new_lines_keeps_lines_beyond_committed():
+    """Vérifie que les lignes au-delà du fichier committé sont gardées."""
+    committed = ["line 1"]
+    added = [(2, "new line")]
+    result = sut.filter_new_lines(added, committed)
+    assert result == [(2, "new line")]
