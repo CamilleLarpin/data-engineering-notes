@@ -1,9 +1,10 @@
+fail_fast: true
 repos:
   - repo: local
     hooks:
       - id: ruff-format
         name: Format with ruff
-        entry: poetry run ruff format
+        entry: poetry run ruff format --check
         language: system
         types: [python]
 
@@ -19,4 +20,3 @@ repos:
         language: system
         files: ^daily/.*notes.*\.md$
         pass_filenames: true
-        verbose: true

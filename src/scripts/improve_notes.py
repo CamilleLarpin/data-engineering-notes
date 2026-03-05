@@ -10,9 +10,13 @@ from loguru import logger
 
 load_dotenv()
 
+log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+logger.remove()
+logger.add(sys.stderr, level=log_level)
+
 SYSTEM_PROMPT = """Tu es un assistant de prise de notes pour un bootcamp Data Engineering.
 
-Tu reçois des lignes modifiées d'un fichier de notes brutes. Tu appliques uniquement :
+Tu reçois un fichier de notes brutes complet. Tu appliques uniquement :
 1. Correction orthographe et grammaire
 2. Remplacement de termes vagues (trucs, choses, bidules, machin) par des termes techniques précis et contextuels
 3. Résolution des marqueurs incomplets : TBC, TBD, ?, ?? — si tu peux les compléter avec certitude
@@ -31,12 +35,6 @@ def get_staged_diff(filepath: str) -> str:
     result = subprocess.run(["git", "diff", "--cached", "-U0", filepath], capture_output=True, text=True)
     logger.debug(f"Diff for {filepath}:\n{result.stdout}")
     return result.stdout
-
-
-def get_committed_lines(filepath: str) -> list[str]:
-    """Retourne les lignes du fichier tel qu'il est dans le dernier commit."""
-    result = subprocess.run(["git", "show", f"HEAD:{filepath}"], capture_output=True, text=True)
-    return result.stdout.splitlines()
 
 
 def extract_added_lines(diff: str) -> list[tuple[int, str]]:
@@ -59,38 +57,19 @@ def extract_added_lines(diff: str) -> list[tuple[int, str]]:
     return lines
 
 
-def improve_lines(lines: list[str]) -> list[str]:
-    """Envoie les lignes à l'API Claude et retourne les lignes corrigées."""
-    if not lines:
-        return lines
+def improve_file(content: str) -> str:
+    """Envoie le contenu complet d'un fichier à Claude et retourne le contenu corrigé."""
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-    content = "\n".join(lines)
-    logger.debug(f"Sending to Claude:\n{content}")
+    logger.debug(f"Sending to Claude: {len(content.splitlines())} lines")
     message = client.messages.create(
         model="claude-sonnet-4-20250514",
-        max_tokens=2048,
+        max_tokens=8192,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": content}],
     )
-    corrected = message.content[0].text.splitlines()
-    logger.debug(f"Received from Claude:\n{corrected}")
+    corrected = message.content[0].text
+    logger.debug(f"Received from Claude: {len(corrected.splitlines())} lines")
     return corrected
-
-
-def apply_corrections(filepath: str, corrections: dict[int, str]):
-    """Remplace les lignes d'un fichier par les corrections fournies."""
-    path = Path(filepath)
-    original_lines = path.read_text(encoding="utf-8").splitlines()
-    for line_num, corrected in corrections.items():
-        logger.debug(f"Applying correction at line {line_num}: {corrected}")
-        if line_num - 1 < len(original_lines):
-            original_lines[line_num - 1] = corrected
-    path.write_text("\n".join(original_lines) + "\n", encoding="utf-8")
-
-
-def filter_new_lines(added: list[tuple[int, str]], committed_lines: list[str]) -> list[tuple[int, str]]:
-    """Filtre les lignes vraiment nouvelles — exclut les lignes vides et celles déjà committées."""
-    return [(n, t) for n, t in added if t.strip() != "" and (n > len(committed_lines) or committed_lines[n - 1] != t)]
 
 
 def main():
@@ -105,19 +84,12 @@ def main():
         if not added:
             continue
 
-        committed_lines = get_committed_lines(filepath)
-        added = filter_new_lines(added, committed_lines)
-
-        if not added:
-            continue
-
-        line_nums, line_texts = zip(*added)
-        corrected = improve_lines(list(line_texts))
-
-        corrections = dict(zip(line_nums, corrected))
-        apply_corrections(filepath, corrections)
+        path = Path(filepath)
+        content = path.read_text(encoding="utf-8")
+        corrected = improve_file(content)
+        path.write_text(corrected, encoding="utf-8")
         subprocess.run(["git", "add", filepath])
-        print(f"✅ {filepath} — {len(corrections)} lignes corrigées")
+        print(f"✅ {filepath} corrigé")
 
 
 if __name__ == "__main__":

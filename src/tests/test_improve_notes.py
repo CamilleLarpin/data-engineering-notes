@@ -11,15 +11,6 @@ def test_extract_added_lines_simple():
     assert result == [(1, "line one"), (2, "line two"), (3, "line three")]
 
 
-def test_apply_corrections_simple(tmp_path):
-    """Vérifie qu'une correction est bien appliquée à la bonne ligne."""
-    f = tmp_path / "notes.md"
-    f.write_text("line 1\nline 2\nline 3\n", encoding="utf-8")
-    sut.apply_corrections(str(f), {2: "CORRECTED"})
-    lines = f.read_text(encoding="utf-8").splitlines()
-    assert lines[1] == "CORRECTED"
-
-
 def test_extract_added_lines_no_newline():
     """Vérifie que la ligne '\\ No newline at end of file' n'incrémente pas le compteur."""
     diff = "@@ -136 +136,3 @@\n-old line\n\\ No newline at end of file\n+old line\n+\n+new line\n"
@@ -34,22 +25,6 @@ def test_extract_added_lines_middle():
     assert result == [(4, "new line 1"), (5, "new line 2")]
 
 
-def test_get_committed_lines_returns_lines():
-    """Vérifie que get_committed_lines retourne les lignes du fichier committé."""
-    mock_result = MagicMock(stdout="line 1\nline 2\nline 3\n")
-    with patch("src.scripts.improve_notes.subprocess.run", return_value=mock_result):
-        result = sut.get_committed_lines("notes/foo.md")
-    assert result == ["line 1", "line 2", "line 3"]
-
-
-def test_apply_corrections_out_of_range(tmp_path):
-    """Vérifie qu'une correction hors-range est ignorée sans erreur."""
-    f = tmp_path / "notes.md"
-    f.write_text("only one line\n", encoding="utf-8")
-    sut.apply_corrections(str(f), {99: "ghost"})
-    assert f.read_text(encoding="utf-8").strip() == "only one line"
-
-
 def test_get_staged_diff_returns_stdout():
     """Vérifie que get_staged_diff retourne le stdout du diff git."""
     mock_result = MagicMock(stdout="diff output")
@@ -58,44 +33,15 @@ def test_get_staged_diff_returns_stdout():
     assert result == "diff output"
 
 
-def test_improve_lines_returns_corrected_lines():
-    """Vérifie que improve_lines retourne les lignes corrigées par l'API."""
+def test_improve_file_returns_corrected_content():
+    """Vérifie que improve_file retourne le contenu corrigé par l'API."""
     mock_message = MagicMock()
-    mock_message.content = [MagicMock(text="corrected one\ncorrected two")]
+    mock_message.content = [MagicMock(text="corrected content")]
     mock_client = MagicMock()
     mock_client.messages.create.return_value = mock_message
 
     with patch("src.scripts.improve_notes.anthropic.Anthropic", return_value=mock_client):
         with patch.dict("os.environ", {"ANTHROPIC_API_KEY": "test-key"}):
-            result = sut.improve_lines(["line one", "line two"])
+            result = sut.improve_file("original content")
 
-    assert result == ["corrected one", "corrected two"]
-
-
-def test_improve_lines_empty_input():
-    """Vérifie que improve_lines retourne une liste vide si l'input est vide."""
-    assert sut.improve_lines([]) == []
-
-
-def test_filter_new_lines_removes_existing():
-    """Vérifie que les lignes déjà committées sont filtrées."""
-    committed = ["line 1", "line 2", "line 3"]
-    added = [(1, "line 1"), (2, "line 2"), (3, "new line")]
-    result = sut.filter_new_lines(added, committed)
-    assert result == [(3, "new line")]
-
-
-def test_filter_new_lines_removes_empty():
-    """Vérifie que les lignes vides sont filtrées."""
-    committed = ["line 1"]
-    added = [(2, ""), (3, "new line")]
-    result = sut.filter_new_lines(added, committed)
-    assert result == [(3, "new line")]
-
-
-def test_filter_new_lines_keeps_lines_beyond_committed():
-    """Vérifie que les lignes au-delà du fichier committé sont gardées."""
-    committed = ["line 1"]
-    added = [(2, "new line")]
-    result = sut.filter_new_lines(added, committed)
-    assert result == [(2, "new line")]
+    assert result == "corrected content"
