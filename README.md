@@ -194,6 +194,21 @@ Ajoute une ligne dans `errors-and-lessons/log.md` si tu as fait une erreur ou d�
 
 ---
 
+## Stack technique
+
+| Composant | Choix |
+|-----------|-------|
+| Enrichissement | Claude API (Sonnet) |
+| Quiz | FastAPI — web app |
+| Containerisation | Docker |
+| Déploiement | Google App Engine Flexible |
+| CI/CD | GitHub Actions (pytest → build → deploy) |
+| Env vars | direnv local · GitHub Secrets CI · app.yaml prod |
+| Lint / Format | Ruff |
+| Tests | pytest |
+
+---
+
 ## Structure du repo
 
 ```
@@ -203,12 +218,20 @@ Ajoute une ligne dans `errors-and-lessons/log.md` si tu as fait une erreur ou d�
 │       ├── notes.md                      # Notes brutes de cours
 │       ├── fiche.md                      # Fiche de révision synthétisée
 │       └── quiz.md                       # Quiz de révision
+├── daily/                                # Capture quotidienne libre
+│   └── YYYY-MM-DD/
+│       ├── notes_YYYY-MM-DD.md
+│       └── conversation_YYYY-MM-DD.md    # optionnel
+├── scripts/
+│   ├── enrich.py                         # Claude → fiche.md (lancement manuel)
+│   └── quiz.py                           # App FastAPI quiz multi-modules
 ├── _templates/                           # Templates réutilisables
 │   ├── fiche-template.md
 │   └── quiz-template.md
 ├── errors-and-lessons/                   # Journal d'erreurs & leçons
 │   └── log.md
-├── reviews/                              # Tracker de révision espacée
-│   └── spaced-repetition.md
+├── Dockerfile                            # Image Python (GAE Flexible)
+├── app.yaml                              # Config Google App Engine
+├── .envrc                                # direnv — charge .env en local
 └── README.md
 ```

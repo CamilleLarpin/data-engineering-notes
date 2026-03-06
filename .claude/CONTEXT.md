@@ -8,8 +8,8 @@
 ---
 
 ## Current State
-**As of**: 2026-03-05
-Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure de base des modules existante, pre-commit configuré avec Ruff. `enrich.py` et `quiz.py` pas encore implémentés. Layer 1 (capture) non encore utilisée — `daily/` n'existe pas encore.
+**As of**: 2026-03-06
+Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure de base des modules existante, pre-commit configuré avec Ruff. GitHub Actions CI (pytest) opérationnel. `enrich.py` et `quiz.py` (FastAPI) pas encore implémentés. Layer 1 (capture) non encore utilisée — `daily/` n'existe pas encore.
 
 ## Architecture
 
@@ -61,12 +61,16 @@ data-engineering-notes/
     log.md
   scripts/
     enrich.py           # enrichissement + dispatch → <module>_fiche.md
-    quiz.py             # quiz CLI multi-modules
+    quiz.py             # quiz web app (FastAPI)
+  Dockerfile            # image Python pour GAE Flexible
+  app.yaml              # config Google App Engine Flexible
+  .envrc                # direnv — charge .env en local (commité, sans valeurs)
   Makefile              # commandes dev
   pyproject.toml        # poetry + ruff + pytest config
 ```
 
 ## Environment
-- **Dev**: local, macOS, pyenv + Poetry venv
-- **Prod**: —
-- **Credentials**: Claude API key (`.env`, jamais commité)
+- **Dev**: local, macOS, pyenv + Poetry venv, direnv + `.envrc` → `.env`
+- **CI**: GitHub Actions — pytest sur chaque push, secrets via GitHub Secrets
+- **Prod**: Google App Engine Flexible — `app.yaml` référence les vars (jamais en dur)
+- **Credentials**: Claude API key + secrets prod (`.env` local, GitHub Secrets en CI, GCP en prod — jamais commités)

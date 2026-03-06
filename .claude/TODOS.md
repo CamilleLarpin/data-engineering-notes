@@ -7,21 +7,41 @@
 
 ---
 
-## Now — CI/CD (leverage existing test setup)
-- [ ] Set up GitHub Action to run pytest on every push
-- [ ] Create `.github/workflows/pytest-ci.yml` — leverage `requirements.txt`
-- [ ] Test with a dummy test that always fails (validate CI catches failures)
-- [ ] Deploy to Google App Engine
+## Now — Séquence cible
 
-## Now — Phase 3 : Enrich (Layer 2) — UC2
+### 1. direnv
+- [ ] Installer direnv (`brew install direnv`)
+- [ ] Créer `.envrc` → `dotenv .env` (commité, sans valeurs)
+- [ ] Vérifier que `.env` est dans `.gitignore`
+- [ ] Ajouter hook direnv dans `~/.zshrc`
+
+### 2. enrich.py — UC2
 - [ ] Implémenter `enrich.py` : lit `notes_YYYY-MM-DD.md` + `conversation_*.md` → met à jour `fiche_<module>.md`
 - [ ] CLI avec Click
 - [ ] Logging avec Loguru
 - [ ] Tests pytest pour `enrich.py`
 - [ ] Entrée Makefile : `make enrich`
 
-## TBC — Phase 4 — UC3/UC4/UC5
-- [ ] Quiz CLI (`quiz.py`) — UC3
+### 3. quiz.py → FastAPI — UC3
+- [ ] Implémenter `quiz.py` comme app FastAPI
+- [ ] Routes : GET `/quiz` (liste modules), GET `/quiz/{module}` (questions)
+- [ ] Tests pytest pour l'API
+- [ ] Entrée Makefile : `make quiz`
+
+### 4. Docker
+- [ ] Créer `Dockerfile` (image Python, expose port FastAPI)
+- [ ] Tester localement : `docker build` + `docker run`
+
+### 5. GAE + secrets prod
+- [ ] Créer `app.yaml` (runtime: custom, env: flex)
+- [ ] Configurer les env vars dans `app.yaml` (références, pas valeurs)
+- [ ] Configurer les secrets prod dans GCP
+
+### 6. CI/CD complet : test → build → deploy
+- [ ] Mettre à jour `.github/workflows/` : ajouter build Docker + deploy GAE
+- [ ] Tester la pipeline complète end-to-end
+
+## TBC — Phase 4 — UC4/UC5
 - [ ] Post-commit hook suggestions — UC4
 - [ ] Suggestion nouveaux modules — UC5
 
@@ -44,3 +64,4 @@
 - [x] `LOG_LEVEL` env var — debug silencieux par défaut, visible avec `LOG_LEVEL=DEBUG`
 - [x] `fail_fast: true` + `verbose: true` retiré — pre-commit s'arrête au premier échec, sortie propre
 - [x] Phase 2 complète : hook testé sur modification, suppression, tests pytest ajoutés
+- [x] GitHub Actions CI — pytest sur chaque push (`.github/workflows/pytest-ci.yml`)
