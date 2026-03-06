@@ -9,26 +9,25 @@
 
 ## Now — Séquence cible
 
-### 1. quiz.py → Bot Telegram — UC3
+### 1. quiz.py → Bot Telegram — UC3 ✓ done
+- [x] Implémenter `quiz.py` comme bot Telegram (`python-telegram-bot`)
+- [x] `/quiz` liste les modules non-vides (inline keyboard), démarre une session
+- [x] Le bot envoie une question, attend la réponse, donne le feedback
+- [x] Erreurs loggées dans `errors-and-lessons/log.md`
+- [x] Tests pytest pour la logique quiz (hors Telegram)
+- [x] Entrée Makefile : `make quiz`
+- [x] Tests déplacés dans `src/tests/`
 
-### 2. quiz.py → Bot Telegram — UC3
-- [ ] Implémenter `quiz.py` comme bot Telegram (`python-telegram-bot`)
-- [ ] Commandes : `/quiz` (liste modules), `/quiz <module>` (démarre une session)
-- [ ] Le bot envoie une question, attend la réponse, donne le feedback
-- [ ] Score et erreurs loggés dans `errors-and-lessons/log.md`
-- [ ] Tests pytest pour la logique quiz (hors Telegram)
-- [ ] Entrée Makefile : `make quiz`
-
-### 3. Docker
+### 2. Docker
 - [ ] Créer `Dockerfile` (image Python pour le bot Telegram)
 - [ ] Tester localement : `docker build` + `docker run`
 
-### 4. GAE + secrets prod
+### 3. GAE + secrets prod
 - [ ] Créer `app.yaml` (runtime: custom, env: flex)
 - [ ] Configurer les env vars dans `app.yaml` (références, pas valeurs)
 - [ ] Configurer les secrets prod dans GCP
 
-### 5. CI/CD complet : test → build → deploy
+### 4. CI/CD complet : test → build → deploy
 - [ ] Mettre à jour `.github/workflows/` : ajouter build Docker + deploy GAE
 - [ ] Tester la pipeline complète end-to-end
 
@@ -59,3 +58,5 @@
 - [x] direnv configuré — `.envrc` → `dotenv .env`, `.env` dans `.gitignore`
 - [x] `enrich.py` implémenté et opérationnel — enrichissement fiches depuis `daily/` (UC2)
 - [x] Bug model ID Anthropic corrigé (`claude-sonnet-4-20250514` → `claude-sonnet-4-6`)
+- [x] `quiz.py` implémenté — bot Telegram, sélection module + Q&A loop + log erreurs (UC3)
+- [x] Tests déplacés dans `src/tests/` — structure unifiée

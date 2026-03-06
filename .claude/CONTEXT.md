@@ -9,7 +9,7 @@
 
 ## Current State
 **As of**: 2026-03-06
-Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure 3-layer opérationnelle. `enrich.py` implémenté et testé — enrichissement des fiches depuis `daily/` fonctionnel. `quiz.py` (Telegram bot) pas encore implémenté. Layer 1 (capture) active — `daily/` utilisé depuis 2026-02-24.
+Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure 3-layer opérationnelle. `enrich.py` opérationnel. `quiz.py` (Telegram bot) implémenté et testé manuellement — sélection de module + Q&A loop fonctionnel. Tests dans `src/tests/`. Prochain: Docker + GAE deploy.
 
 ## Architecture
 
@@ -38,41 +38,18 @@ data-engineering-notes/
       <slug>_fiche.md
   errors-and-lessons/
     log.md
-  reviews/
-    spaced-repetition.md
-  src/scripts/
-    enrich.py           # enrichissement + dispatch → fiches (opérationnel)
-    improve_notes.py    # hook pre-commit UC1 (opérationnel)
-  tests/
-    test_enrich.py
+  src/
+    scripts/
+      enrich.py         # enrichissement + dispatch → fiches (opérationnel)
+      improve_notes.py  # hook pre-commit UC1 (opérationnel)
+      quiz.py           # bot Telegram UC3 (opérationnel)
+    tests/
+      test_enrich.py
+      test_improve_notes.py
+      test_quiz.py
+  Dockerfile            # TODO
+  app.yaml              # TODO
   .envrc                # direnv — charge .env (commité, sans valeurs)
-  Makefile
-  pyproject.toml
-```
-
-## File Structure — Target
-*(supprimer cette section une fois atteinte)*
-```
-data-engineering-notes/
-  .claude/              # context files
-  daily/
-    YYYY-MM-DD/
-      notes_YYYY-MM-DD.md
-      conversation_YYYY-MM-DD[_N].md
-  modules/
-    <catégorie>/<slug>/
-      <slug>_fiche.md
-  errors-and-lessons/
-    log.md
-  src/scripts/
-    enrich.py
-    quiz.py             # bot Telegram (python-telegram-bot)
-  tests/
-    test_enrich.py
-    test_quiz.py
-  Dockerfile            # image Python pour GAE Flexible
-  app.yaml              # config Google App Engine Flexible
-  .envrc
   Makefile
   pyproject.toml
 ```
