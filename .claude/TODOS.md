@@ -7,6 +7,12 @@
 
 ---
 
+## Now — CI/CD (leverage existing test setup)
+- [ ] Set up GitHub Action to run pytest on every push
+- [ ] Create `.github/workflows/pytest-ci.yml` — leverage `requirements.txt`
+- [ ] Test with a dummy test that always fails (validate CI catches failures)
+- [ ] Deploy to Google App Engine
+
 ## Now — Phase 3 : Enrich (Layer 2) — UC2
 - [ ] Implémenter `enrich.py` : lit `notes_YYYY-MM-DD.md` + `conversation_*.md` → met à jour `fiche_<module>.md`
 - [ ] CLI avec Click
