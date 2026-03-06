@@ -18,14 +18,17 @@
 - [x] Entrée Makefile : `make quiz`
 - [x] Tests déplacés dans `src/tests/`
 
-### 2. Docker
-- [ ] Créer `Dockerfile` (image Python pour le bot Telegram)
-- [ ] Tester localement : `docker build` + `docker run`
+### 2. Docker ✓ done
+- [x] Créer `Dockerfile` (image Python pour le bot Telegram)
+- [x] Tester localement : `docker build` + `docker run`
 
-### 3. GAE + secrets prod
-- [ ] Créer `app.yaml` (runtime: custom, env: flex)
-- [ ] Configurer les env vars dans `app.yaml` (références, pas valeurs)
-- [ ] Configurer les secrets prod dans GCP
+### 3. GCP — Compute Engine VM
+- [ ] Créer Artifact Registry repo (gcloud CLI ou Console)
+- [ ] Build image `--platform linux/amd64` pour GCP
+- [ ] Push image vers Artifact Registry
+- [ ] Créer VM Compute Engine, installer Docker
+- [ ] Pull image + lancer le conteneur sur la VM
+- [ ] Makefile : `build_gcp`, `push_gcp`, `deploy_gcp`
 
 ### 4. CI/CD complet : test → build → deploy
 - [ ] Mettre à jour `.github/workflows/` : ajouter build Docker + deploy GAE

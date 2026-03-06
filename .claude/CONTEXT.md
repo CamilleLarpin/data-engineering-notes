@@ -9,7 +9,7 @@
 
 ## Current State
 **As of**: 2026-03-06
-Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure 3-layer opérationnelle. `enrich.py` opérationnel. `quiz.py` (Telegram bot) implémenté et testé manuellement — sélection de module + Q&A loop fonctionnel. Tests dans `src/tests/`. Prochain: Docker + GAE deploy.
+Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure 3-layer opérationnelle. `enrich.py` opérationnel. `quiz.py` (Telegram bot) implémenté et testé manuellement — sélection de module + Q&A loop fonctionnel. Tests dans `src/tests/`. Dockerfile opérationnel — image buildée et testée localement (`make docker-build` + `make docker-run`). Prochain: GCP Compute Engine deploy.
 
 ## Architecture
 
@@ -47,8 +47,8 @@ data-engineering-notes/
       test_enrich.py
       test_improve_notes.py
       test_quiz.py
-  Dockerfile            # TODO
-  app.yaml              # TODO
+  Dockerfile            # opérationnel — local Docker testé
+  app.yaml              # TODO (remplacé par Compute Engine)
   .envrc                # direnv — charge .env (commité, sans valeurs)
   Makefile
   pyproject.toml
