@@ -9,20 +9,9 @@
 
 ## Now — Séquence cible
 
-### 1. direnv
-- [ ] Installer direnv (`brew install direnv`)
-- [ ] Créer `.envrc` → `dotenv .env` (commité, sans valeurs)
-- [ ] Vérifier que `.env` est dans `.gitignore`
-- [ ] Ajouter hook direnv dans `~/.zshrc`
+### 1. quiz.py → Bot Telegram — UC3
 
-### 2. enrich.py — UC2
-- [ ] Implémenter `enrich.py` : lit `notes_YYYY-MM-DD.md` + `conversation_*.md` → met à jour `fiche_<module>.md`
-- [ ] CLI avec Click
-- [ ] Logging avec Loguru
-- [ ] Tests pytest pour `enrich.py`
-- [ ] Entrée Makefile : `make enrich`
-
-### 3. quiz.py → Bot Telegram — UC3
+### 2. quiz.py → Bot Telegram — UC3
 - [ ] Implémenter `quiz.py` comme bot Telegram (`python-telegram-bot`)
 - [ ] Commandes : `/quiz` (liste modules), `/quiz <module>` (démarre une session)
 - [ ] Le bot envoie une question, attend la réponse, donne le feedback
@@ -30,16 +19,16 @@
 - [ ] Tests pytest pour la logique quiz (hors Telegram)
 - [ ] Entrée Makefile : `make quiz`
 
-### 4. Docker
+### 3. Docker
 - [ ] Créer `Dockerfile` (image Python pour le bot Telegram)
 - [ ] Tester localement : `docker build` + `docker run`
 
-### 5. GAE + secrets prod
+### 4. GAE + secrets prod
 - [ ] Créer `app.yaml` (runtime: custom, env: flex)
 - [ ] Configurer les env vars dans `app.yaml` (références, pas valeurs)
 - [ ] Configurer les secrets prod dans GCP
 
-### 6. CI/CD complet : test → build → deploy
+### 5. CI/CD complet : test → build → deploy
 - [ ] Mettre à jour `.github/workflows/` : ajouter build Docker + deploy GAE
 - [ ] Tester la pipeline complète end-to-end
 
@@ -67,3 +56,6 @@
 - [x] `fail_fast: true` + `verbose: true` retiré — pre-commit s'arrête au premier échec, sortie propre
 - [x] Phase 2 complète : hook testé sur modification, suppression, tests pytest ajoutés
 - [x] GitHub Actions CI — pytest sur chaque push (`.github/workflows/pytest-ci.yml`)
+- [x] direnv configuré — `.envrc` → `dotenv .env`, `.env` dans `.gitignore`
+- [x] `enrich.py` implémenté et opérationnel — enrichissement fiches depuis `daily/` (UC2)
+- [x] Bug model ID Anthropic corrigé (`claude-sonnet-4-20250514` → `claude-sonnet-4-6`)

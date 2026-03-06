@@ -9,7 +9,7 @@
 
 ## Current State
 **As of**: 2026-03-06
-Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure de base des modules existante, pre-commit configuré avec Ruff. GitHub Actions CI (pytest) opérationnel. `enrich.py` et `quiz.py` (Telegram bot) pas encore implémentés. Layer 1 (capture) non encore utilisée — `daily/` n'existe pas encore.
+Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure 3-layer opérationnelle. `enrich.py` implémenté et testé — enrichissement des fiches depuis `daily/` fonctionnel. `quiz.py` (Telegram bot) pas encore implémenté. Layer 1 (capture) active — `daily/` utilisé depuis 2026-02-24.
 
 ## Architecture
 
