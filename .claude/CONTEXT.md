@@ -9,7 +9,7 @@
 
 ## Current State
 **As of**: 2026-03-06
-Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure de base des modules existante, pre-commit configuré avec Ruff. GitHub Actions CI (pytest) opérationnel. `enrich.py` et `quiz.py` (FastAPI) pas encore implémentés. Layer 1 (capture) non encore utilisée — `daily/` n'existe pas encore.
+Bootcamp en cours (Feb 23 – Mar 27, 2026). Structure de base des modules existante, pre-commit configuré avec Ruff. GitHub Actions CI (pytest) opérationnel. `enrich.py` et `quiz.py` (Telegram bot) pas encore implémentés. Layer 1 (capture) non encore utilisée — `daily/` n'existe pas encore.
 
 ## Architecture
 
@@ -29,19 +29,25 @@ Layer 3 — Master  : quiz multi-modules · errors-and-lessons/log.md
 ```
 data-engineering-notes/
   .claude/              # context files
-  _templates/           # fiche-template.md, quiz-template.md
+  daily/
+    YYYY-MM-DD/
+      notes_YYYY-MM-DD.md
+      conversation_YYYY-MM-DD[_N].md
   modules/
     <catégorie>/<slug>/
-      notes.md          # notes brutes existantes (legacy)
-      fiche.md          # fiches existantes (legacy, à migrer)
-      conversation.md   # extraits de conversations Claude.ai
+      <slug>_fiche.md
   errors-and-lessons/
     log.md
   reviews/
     spaced-repetition.md
-  scripts/
-    enrich.py           # stub existant (à implémenter)
-    improve_notes.py    # hook pre-commit existant
+  src/scripts/
+    enrich.py           # enrichissement + dispatch → fiches (opérationnel)
+    improve_notes.py    # hook pre-commit UC1 (opérationnel)
+  tests/
+    test_enrich.py
+  .envrc                # direnv — charge .env (commité, sans valeurs)
+  Makefile
+  pyproject.toml
 ```
 
 ## File Structure — Target
@@ -49,24 +55,26 @@ data-engineering-notes/
 ```
 data-engineering-notes/
   .claude/              # context files
-  _templates/           # fiche-template.md, quiz-template.md
   daily/
     YYYY-MM-DD/
-      notes.md                  # capture quotidienne
-      conversation_YYYY-MM-DD[_N].md  # optionnel, zéro ou plusieurs
+      notes_YYYY-MM-DD.md
+      conversation_YYYY-MM-DD[_N].md
   modules/
     <catégorie>/<slug>/
-      <module>_fiche.md         # fiche de révision (output de enrich.py)
+      <slug>_fiche.md
   errors-and-lessons/
     log.md
-  scripts/
-    enrich.py           # enrichissement + dispatch → <module>_fiche.md
-    quiz.py             # quiz bot Telegram (python-telegram-bot)
+  src/scripts/
+    enrich.py
+    quiz.py             # bot Telegram (python-telegram-bot)
+  tests/
+    test_enrich.py
+    test_quiz.py
   Dockerfile            # image Python pour GAE Flexible
   app.yaml              # config Google App Engine Flexible
-  .envrc                # direnv — charge .env en local (commité, sans valeurs)
-  Makefile              # commandes dev
-  pyproject.toml        # poetry + ruff + pytest config
+  .envrc
+  Makefile
+  pyproject.toml
 ```
 
 ## Environment

@@ -1,4 +1,4 @@
-.PHONY: tests lint format
+.PHONY: tests lint format enrich
 
 tests:
 	@echo "Running tests..."
@@ -9,3 +9,6 @@ lint:
 
 format:
 	poetry run ruff format .
+
+enrich:
+	poetry run python src/scripts/enrich.py $(dir)

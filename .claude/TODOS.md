@@ -31,7 +31,7 @@
 - [ ] Entrée Makefile : `make quiz`
 
 ### 4. Docker
-- [ ] Créer `Dockerfile` (image Python, expose port FastAPI)
+- [ ] Créer `Dockerfile` (image Python pour le bot Telegram)
 - [ ] Tester localement : `docker build` + `docker run`
 
 ### 5. GAE + secrets prod
