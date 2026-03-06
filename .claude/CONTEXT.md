@@ -61,7 +61,7 @@ data-engineering-notes/
     log.md
   scripts/
     enrich.py           # enrichissement + dispatch → <module>_fiche.md
-    quiz.py             # quiz web app (FastAPI)
+    quiz.py             # quiz bot Telegram (python-telegram-bot)
   Dockerfile            # image Python pour GAE Flexible
   app.yaml              # config Google App Engine Flexible
   .envrc                # direnv — charge .env en local (commité, sans valeurs)

@@ -18,12 +18,12 @@
 - Capture quotidienne libre (`daily/`)
 - Enrichissement + dispatch automatisé via Claude API (`enrich.py`)
 - Fiches de révision structurées par module (`<module>_fiche.md`)
-- Quiz CLI avec log des erreurs
+- Quiz bot Telegram avec log des erreurs
 
 **Out of scope**:
 - Spaced repetition (reporté)
 - Partage / collaboration
-- Interface web ou mobile
+- Interface web (FastAPI/HTML) — abandonné, trop de friction pour usage personnel
 - Intégration avec des outils externes (Notion, Anki, etc.)
 - Génération automatique au commit
 
@@ -36,7 +36,8 @@
 | virtualenv / Poetry | isoler les dépendances |
 | Ruff | lint + formatting (pre-commit) |
 | pre-commit | hooks UC1 + UC4 |
-| Click | CLI pour `enrich.py` et `quiz.py` |
+| Click | CLI pour `enrich.py` |
+| python-telegram-bot | bot Telegram pour `quiz.py` |
 | Loguru | logging dans les scripts |
 | Pytest | tests unitaires des scripts |
 | Sphinx | documentation des scripts |
@@ -87,10 +88,11 @@
 
 
 
-### UC3 — Quiz multi-modules
-**Actor**: Camille, en révision
-**Flow**: `python scripts/quiz.py <slug1> <slug2> ...` → questions générées depuis les `<module>_fiche.md` des modules sélectionnés + historique des erreurs → questions ratées re-posées
-**Expected output**: score, erreurs loggées dans `errors-and-lessons/log.md`
+### UC3 — Quiz multi-modules (bot Telegram)
+**Actor**: Camille, en révision depuis le téléphone
+**Flow**: Camille envoie `/quiz <slug>` dans Telegram → le bot envoie une question générée depuis `<module>_fiche.md` → Camille répond → feedback immédiat → questions ratées re-posées → score final
+**Expected output**: session quiz dans Telegram, score affiché, erreurs loggées dans `errors-and-lessons/log.md`
+**Rationale UX**: pas d'URL à ouvrir, pas de navigateur — révision depuis le téléphone, n'importe où
 
 ### UC4 — Suggestions d'outils à appliquer (post-commit automatique)
 **Actor**: système, déclenché à l'ajout d'une nouvelle fiche `<module>_fiche.md`

@@ -22,10 +22,12 @@
 - [ ] Tests pytest pour `enrich.py`
 - [ ] Entrée Makefile : `make enrich`
 
-### 3. quiz.py → FastAPI — UC3
-- [ ] Implémenter `quiz.py` comme app FastAPI
-- [ ] Routes : GET `/quiz` (liste modules), GET `/quiz/{module}` (questions)
-- [ ] Tests pytest pour l'API
+### 3. quiz.py → Bot Telegram — UC3
+- [ ] Implémenter `quiz.py` comme bot Telegram (`python-telegram-bot`)
+- [ ] Commandes : `/quiz` (liste modules), `/quiz <module>` (démarre une session)
+- [ ] Le bot envoie une question, attend la réponse, donne le feedback
+- [ ] Score et erreurs loggés dans `errors-and-lessons/log.md`
+- [ ] Tests pytest pour la logique quiz (hors Telegram)
 - [ ] Entrée Makefile : `make quiz`
 
 ### 4. Docker

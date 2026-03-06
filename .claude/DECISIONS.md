@@ -47,6 +47,12 @@
 - **Decision**: `quiz.py` devient une web app FastAPI déployée sur Google App Engine Flexible, pas une CLI locale.
 - **Rationale**: déploiement sur GAE implique une interface HTTP. FastAPI est léger, rapide à mettre en place, et cohérent avec le contexte MLOps/Data Engineering du bootcamp. Alternative (CLI uniquement) rejetée car incompatible avec le déploiement cloud.
 - **Date**: 2026-03-06
+- **Status**: superseded by [stack] Bot Telegram pour le quiz (UC3)
+
+## [stack] Bot Telegram pour le quiz (UC3) — remplace FastAPI
+- **Decision**: `quiz.py` devient un bot Telegram (`python-telegram-bot`), pas une web app FastAPI.
+- **Rationale**: FastAPI nécessite une interface web (HTML/CSS/JS) — trop de friction pour un outil de révision personnel. Un bot Telegram correspond à l'usage réel : réviser depuis le téléphone, n'importe où, sans ouvrir un navigateur. Le bot tourne en continu sur GAE et envoie des questions directement dans Telegram ; score et erreurs loggés dans `errors-and-lessons/log.md`. Alternative (FastAPI) rejetée pour friction UX.
+- **Date**: 2026-03-06
 - **Status**: active
 
 ## [stack] Docker + Google App Engine Flexible pour le déploiement

@@ -199,7 +199,7 @@ Ajoute une ligne dans `errors-and-lessons/log.md` si tu as fait une erreur ou d�
 | Composant | Choix |
 |-----------|-------|
 | Enrichissement | Claude API (Sonnet) |
-| Quiz | FastAPI — web app |
+| Quiz | Bot Telegram (`python-telegram-bot`) |
 | Containerisation | Docker |
 | Déploiement | Google App Engine Flexible |
 | CI/CD | GitHub Actions (pytest → build → deploy) |
@@ -224,7 +224,7 @@ Ajoute une ligne dans `errors-and-lessons/log.md` si tu as fait une erreur ou d�
 │       └── conversation_YYYY-MM-DD.md    # optionnel
 ├── scripts/
 │   ├── enrich.py                         # Claude → fiche.md (lancement manuel)
-│   └── quiz.py                           # App FastAPI quiz multi-modules
+│   └── quiz.py                           # Bot Telegram quiz multi-modules
 ├── _templates/                           # Templates réutilisables
 │   ├── fiche-template.md
 │   └── quiz-template.md
