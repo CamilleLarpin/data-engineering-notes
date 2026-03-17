@@ -12,8 +12,8 @@
 
 ## Context Files
 - .claude/CONTEXT.md — current state, architecture, file structure, dependencies
-- .claude/DECISIONS.md — active decisions only (resolved → DECISIONS_ARCHIVE.md)
-- .claude/LESSONS.md — what to avoid: mistakes, patterns, gotchas (never delete)
+- .claude/DECISIONS.md — active decisions only (resolved → DECISIONS_ARCHIVE.md); always load alongside ~/.claude/DECISIONS_GLOBAL.md
+- .claude/LESSONS.md — what to avoid: mistakes, patterns, gotchas (never delete); always load ~/.claude/LESSONS_GLOBAL.md index + relevant category files for current task domain
 - .claude/DESIGN.md — problem space, use cases, scope, outils/notions cibles
 - .claude/TODOS.md — active milestones, next actions, blocked items
 
