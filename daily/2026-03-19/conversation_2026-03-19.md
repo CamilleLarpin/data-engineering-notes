@@ -2,4 +2,4 @@
 <!-- from: software-engineering/docker-compose -->
 # Conversations — docker-compose
 
-<\!-- Entrées ajoutées par Claude Code à partir des liens partagés -->
+a chaque fois qu'on a eu le container, on y a eu acces en 
