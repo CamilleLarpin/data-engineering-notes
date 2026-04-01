@@ -7,6 +7,9 @@
 
 ---
 
+## Maintenance
+- [ ] Migrate CONTEXT.md to new format (template: `~/.claude/templates/CONTEXT.template.md`)
+
 ## Now — Séquence cible
 
 ### 1. quiz.py → Bot Telegram — UC3 ✓ done
